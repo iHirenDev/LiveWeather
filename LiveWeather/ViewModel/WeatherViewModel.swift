@@ -25,7 +25,9 @@ class WeatherViewModel: NSObject {
         apiClient.apiCall { (weatherDict) in
             self.weatherData = weatherDict! as [NSDictionary]
             self.weather = self.weatherArray(array: self.weatherData)
-           print(self.weather[1].main?.temp) 
+            print(self.weather[1].main?.temp)
+            let arr = self.weather[1].weather
+            print(arr?[0].description)
             completion(true)
         }
     }

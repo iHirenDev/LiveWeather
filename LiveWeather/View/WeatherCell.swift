@@ -12,6 +12,7 @@ import UIKit
 class WeatherCell: UITableViewCell {
     @IBOutlet weak var lblCityName:UILabel!
     @IBOutlet weak var lblTemp:UILabel!
+    @IBOutlet weak var weatherImg:UIImageView!
     
     
     override func awakeFromNib() {
@@ -29,5 +30,18 @@ class WeatherCell: UITableViewCell {
         self.lblCityName.text = weatherInfo.name
         
         self.lblTemp.text = String((weatherInfo.main?.temp)!)
+        
+        let weatherDescription = weatherInfo.weather?[0].main
+        
+        if weatherDescription == "Clear"{
+            self.weatherImg.image = UIImage(named: "sunny")
+        }
+        else if(weatherDescription == "Clouds"){
+            self.weatherImg.image = UIImage(named: "cloudy")
+        }else{
+            self.weatherImg.image = UIImage(named: "rainy")
+        }
+        
+        
     }
 }

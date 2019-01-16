@@ -71,5 +71,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let weatherDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "WeatherDetailVC") as? WeatherDetailVC
+       
+            let weatherInfo = viewModel.weather[indexPath.row]
+        
+        let cityName = weatherInfo.name
+        
+        let minTemp = weatherInfo.main?.temp_min
+        let maxTemp = weatherInfo.main?.temp_max
+        let description = weatherInfo.weather?[0].description
+        let humidity = weatherInfo.main?.humidity
+        let wind = weatherInfo.wind?.speed
+        
+        weatherDetailsVC?.weatherDetailDict["city"] = cityName
+        weatherDetailsVC?.weatherDetailDict["minTemp"] = minTemp
+        weatherDetailsVC?.weatherDetailDict["maxTemp"] = maxTemp
+        weatherDetailsVC?.weatherDetailDict["description"] = description
+        weatherDetailsVC?.weatherDetailDict["humidity"] = humidity
+        weatherDetailsVC?.weatherDetailDict["wind"] = wind
+        
+        self.navigationController?.pushViewController(weatherDetailsVC!, animated: true)
+    }
+    
+    
 }
 
